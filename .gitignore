@@ -1,1 +1,5 @@
 main/config/wifi_cfg.json
+main/ota_updater
+main/ws
+main/uploadall.sh
+main/uploadone.sh
