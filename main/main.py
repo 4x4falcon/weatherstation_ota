@@ -96,8 +96,7 @@ def boot():
 
     print(machine.reset_cause())
 
-#    if machine.reset_cause() == machine.PWRON_RESET:
-    if machine.reset_cause() == machine.HARD_RESET:
+    if (machine.reset_cause() == machine.PWRON_RESET) or (machine.reset_cause() == machine.HARD_RESET):
         print("new version check")
         download_and_install_updates_if_available()
 
@@ -110,16 +109,10 @@ def start():
     # yourapp.main()
 
     try:
-        from ws.main.ws import WeatherStationClass
-
         print("Main application")
 
-        ws = WeatherStationClass()
-        while (1):
+	import ws.main.ws
 
-            ws.doit()
-
-            sleep(60)
     except:
         pass
 
