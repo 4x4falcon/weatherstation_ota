@@ -1,11 +1,11 @@
 help = """
- The help for term
+ Commands available
 
-showWifiConfig()	 	- show the ssid and password for the wifi connection
-setWifiSSID(<SSID>)	 	- set the SSID for the wifi
-setWifiPassword(<Password>)	- set the password for the wifi
+c1() 		= showWifiConfig()	 	- show the ssid and password for the wifi connection
+c2(<SSID>) 	= setWifiSSID(<SSID>)	 	- set the SSID for the wifi
+c3(<Password>)	= setWifiPassword(<Password>)	- set the password for the wifi
 
- """
+"""
 
 print (help)
 
@@ -90,4 +90,11 @@ def setWifiPassword(PW=None):
 		print ("Nothing to change")
 
 
+def c1():
+	showWifiConfig()
 
+def c2(SSID=None):
+	setWifiSSID(SSID)
+
+def c3(Password=None):
+	setWifiPassword(Password)
