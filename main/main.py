@@ -92,11 +92,39 @@ def download_and_install_updates_if_available():
 
 def boot():
     # Check reason for reset - only update if power on reset
+    from os import remove
     print("Boot check")
 
-    print(machine.reset_cause())
+    mrc = machine.reset_cause()
 
-    if (machine.reset_cause() == machine.PWRON_RESET) or (machine.reset_cause() == machine.HARD_RESET):
+    print(mrc)
+
+    newVersion = False
+
+    if (mrc == machine.SOFT_RESET):
+        newVersion = False
+    elif (mrc == machine.PWRON_RESET):
+        newVersion = True
+    elif (mrc == machine.HARD_RESET):
+        newVersion = False
+    else:
+        newVersion = False
+
+
+    try:
+        f = open("doUpdate")
+	if (f.read() == '99'):
+            print("Server signaled new version")
+            newVersion = True
+            os.remove("doUpdate")
+        f.close()
+    except OSError:
+        pass
+
+
+
+
+    if (newVersion):
         print("new version check")
         download_and_install_updates_if_available()
 
